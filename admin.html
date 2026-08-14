@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Motion Media — Panel</title>
+<style>
+  :root { --color-primary: #2f6fed; --color-border: #e3e6ee; --color-muted: #5b6478; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f7f8fb; margin: 0; color: #10172a; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.15rem; margin-top: 40px; }
+  .sub { color: var(--color-muted); margin-bottom: 32px; }
+  .login-box { max-width: 340px; margin: 120px auto; background: #fff; border: 1px solid var(--color-border); border-radius: 14px; padding: 32px; text-align: center; }
+  .login-box input { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--color-border); margin: 16px 0; font-size: 0.95rem; }
+  .login-box button, .btn { background: var(--color-primary); color: #fff; border: none; padding: 10px 20px; border-radius: 999px; font-weight: 700; cursor: pointer; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .card { background: #fff; border: 1px solid var(--color-border); border-radius: 12px; padding: 20px; }
+  .card .num { font-size: 1.8rem; font-weight: 800; }
+  .card .label { color: var(--color-muted); font-size: 0.85rem; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.04); margin-bottom: 40px; font-size: 0.82rem; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--color-border); white-space: nowrap; }
+  th { background: #10172a; color: #fff; position: sticky; top: 0; }
+  .table-scroll { overflow-x: auto; border-radius: 12px; }
+  #app { display: none; }
+  .error { color: #d33; font-size: 0.85rem; min-height: 18px; }
+</style>
+</head>
+<body>
+
+<div class="login-box" id="login-box">
+  <h1>Panel Motion Media</h1>
+  <p class="sub">Acceso solo para el equipo</p>
+  <input type="password" id="password-input" placeholder="Contraseña" />
+  <p class="error" id="login-error"></p>
+  <button onclick="intentarLogin()">Entrar</button>
+</div>
+
+<div class="wrap" id="app">
+  <h1>Panel de métricas</h1>
+  <p class="sub">Datos en vivo desde Supabase. Recarga la página para actualizar.</p>
+
+  <div class="cards">
+    <div class="card"><div class="num" id="num-visitas">—</div><div class="label">Visitas totales</div></div>
+    <div class="card"><div class="num" id="num-clic-publicidad">—</div><div class="label">Clics en "Publicítate"</div></div>
+    <div class="card"><div class="num" id="num-clic-pantalla">—</div><div class="label">Clics en "Llevar pantalla"</div></div>
+    <div class="card"><div class="num" id="num-leads-publicidad">—</div><div class="label">Negocios registrados</div></div>
+    <div class="card"><div class="num" id="num-leads-pantalla">—</div><div class="label">Conductores registrados</div></div>
+    <div class="card"><div class="num" id="num-tiempo-promedio">—</div><div class="label">Tiempo promedio por vista (seg, aprox.)</div></div>
+  </div>
+
+  <h2>Reseñas</h2>
+  <div class="cards" style="margin-bottom:16px;">
+    <div class="card"><div class="num" id="num-review-exp">—</div><div class="label">★ Promedio facilidad de uso</div></div>
+    <div class="card"><div class="num" id="num-review-interes">—</div><div class="label">★ Promedio interés/pago</div></div>
+    <div class="card"><div class="num" id="num-review-total">—</div><div class="label">Reseñas totales</div></div>
+  </div>
+  <div class="table-scroll">
+    <table id="tabla-reviews">
+      <thead>
+        <tr><th>Fecha</th><th>Tipo</th><th>Nombre</th><th>★ Facilidad</th><th>★ Interés</th><th>Comentario</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <h2>Todas las interacciones (clics, tiempo, envíos)</h2>
+  <p class="sub" style="margin-bottom:12px;">Cada fila es una interacción registrada: visitas, clics, selección de paquete, subida de arte, envíos de formulario, tiempo aproximado por vista, etc.</p>
+  <div class="table-scroll">
+    <table id="tabla-eventos">
+      <thead>
+        <tr><th>Fecha</th><th>Tipo</th><th>Página</th><th>Detalle</th><th>Duración (seg)</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <h2>Negocios (PYME)</h2>
+  <div class="table-scroll">
+    <table id="tabla-pyme">
+      <thead>
+        <tr><th>Fecha</th><th>Negocio</th><th>Rubro</th><th>Tipo</th><th>NIT/DUI</th><th>Contacto</th><th>Correo</th><th>Zona</th><th>Horario</th><th>Paquete</th><th>Redes</th><th>Arte</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <h2>Conductores</h2>
+  <div class="table-scroll">
+    <table id="tabla-conductor">
+      <thead>
+        <tr><th>Fecha</th><th>Nombre</th><th>DUI</th><th>Licencia</th><th>Placa</th><th>Plataforma</th><th>Vehículo</th><th>Zona</th><th>Horas/día</th><th>Dirección</th><th>Referencia</th><th>Contacto</th><th>Correo</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Misma configuración que script.js — pega tus mismos valores de Supabase
+  const SUPABASE_URL = "https://owxgqgunbiiwtivjxkii.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93eGdxZ3VuYmlpd3Rpdmp4a2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2NTIzMDQsImV4cCI6MjEwMjIyODMwNH0.KQ1dI9e26Yr-73fOl2g8bSKJELE1OJiVQD88voshW5Q";
+  let supabaseClient = null;
+  try {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (err) {
+    console.warn("Supabase todavía no está configurado. Pega tus credenciales reales arriba para ver datos.", err.message);
+  }
+
+  // Contraseña simple del panel — cámbiala aquí.
+  // Nota: esto es solo una barrera visual para el MVP, no es seguridad real
+  // (cualquiera que vea el código fuente puede leer la contraseña).
+  const PANEL_PASSWORD = "motionmedia2026";
+const PANEL_PASSWORD = "motionmedia2026";
+  function intentarLogin() {
+    const val = document.getElementById("password-input").value;
+    if (val === PANEL_PASSWORD) {
+      document.getElementById("login-box").style.display = "none";
+      document.getElementById("app").style.display = "block";
+      cargarDatos();
+    } else {
+      document.getElementById("login-error").textContent = "Contraseña incorrecta";
+    }
+  }
+
+  function esc(v) { return v === null || v === undefined ? "" : String(v); }
+
+  async function cargarDatos() {
+    if (!supabaseClient) {
+      document.querySelector(".sub").textContent = "Supabase todavía no está configurado — pega tu Project URL y anon key en admin.html para ver datos reales.";
+      return;
+    }
+    const { data: eventos } = await supabaseClient.from("eventos").select("*");
+    const { data: leads } = await supabaseClient.from("leads").select("*").order("created_at", { ascending: false });
+    const { data: reviews } = await supabaseClient.from("reviews").select("*").order("created_at", { ascending: false });
+
+    const ev = eventos || [];
+    const ld = leads || [];
+    const pymes = ld.filter(l => l.tipo === "publicidad");
+    const conductores = ld.filter(l => l.tipo === "pantalla");
+
+    document.getElementById("num-visitas").textContent = ev.filter(e => e.tipo_evento === "visita").length;
+    document.getElementById("num-clic-publicidad").textContent = ev.filter(e => e.tipo_evento === "clic_publicidad").length;
+    document.getElementById("num-clic-pantalla").textContent = ev.filter(e => e.tipo_evento === "clic_pantalla").length;
+    document.getElementById("num-leads-publicidad").textContent = pymes.length;
+    document.getElementById("num-leads-pantalla").textContent = conductores.length;
+
+    const rv = reviews || [];
+    document.getElementById("num-review-total").textContent = rv.length;
+    const promEstrellas = (campo) => {
+      const vals = rv.map(r => Number(r[campo])).filter(n => !isNaN(n));
+      return vals.length ? (vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1) : "—";
+    };
+    document.getElementById("num-review-exp").textContent = promEstrellas("estrellas_experiencia");
+    document.getElementById("num-review-interes").textContent = promEstrellas("estrellas_interes");
+
+    document.querySelector("#tabla-reviews tbody").innerHTML = rv.map(r => `
+      <tr>
+        <td>${new Date(r.created_at).toLocaleString("es-SV")}</td>
+        <td>${esc(r.tipo_persona)}</td>
+        <td>${esc(r.nombre) || "—"}</td>
+        <td>${"★".repeat(Number(r.estrellas_experiencia) || 0)}${"☆".repeat(5 - (Number(r.estrellas_experiencia) || 0))}</td>
+        <td>${"★".repeat(Number(r.estrellas_interes) || 0)}${"☆".repeat(5 - (Number(r.estrellas_interes) || 0))}</td>
+        <td>${esc(r.comentario)}</td>
+      </tr>
+    `).join("");
+
+    const tiempos = ev.filter(e => e.tipo_evento === "tiempo_en_vista" && e.duracion_seg != null).map(e => Number(e.duracion_seg));
+    const promedio = tiempos.length ? Math.round(tiempos.reduce((a, b) => a + b, 0) / tiempos.length) : 0;
+    document.getElementById("num-tiempo-promedio").textContent = tiempos.length ? promedio : "—";
+
+    const evOrdenados = [...ev].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    document.querySelector("#tabla-eventos tbody").innerHTML = evOrdenados.slice(0, 300).map(e => `
+      <tr>
+        <td>${new Date(e.created_at).toLocaleString("es-SV")}</td>
+        <td>${esc(e.tipo_evento)}</td>
+        <td>${esc(e.pagina)}</td>
+        <td>${esc(e.detalle)}</td>
+        <td>${e.duracion_seg != null ? esc(e.duracion_seg) : "—"}</td>
+      </tr>
+    `).join("");
+
+    document.querySelector("#tabla-pyme tbody").innerHTML = pymes.map(l => `
+      <tr>
+        <td>${new Date(l.created_at).toLocaleString("es-SV")}</td>
+        <td>${esc(l.empresa)}</td>
+        <td>${esc(l.rubro)}</td>
+        <td>${esc(l.tipo_negocio)}</td>
+        <td>${esc(l.nit_dui)}</td>
+        <td>${esc(l.nombre)} · ${esc(l.telefono)}</td>
+        <td>${esc(l.correo)}</td>
+        <td>${esc(l.zona)}</td>
+        <td>${esc(l.horario)}</td>
+        <td>${esc(l.paquete)} ($${esc(l.precio)})</td>
+        <td>${esc(l.redes)}</td>
+        <td>${l.arte_url ? `<a href="${esc(l.arte_url)}" target="_blank" rel="noopener">Ver archivo</a>` : "—"}</td>
+      </tr>
+    `).join("");
+
+    document.querySelector("#tabla-conductor tbody").innerHTML = conductores.map(l => `
+      <tr>
+        <td>${new Date(l.created_at).toLocaleString("es-SV")}</td>
+        <td>${esc(l.nombre)}</td>
+        <td>${esc(l.dui)}</td>
+        <td>${esc(l.licencia)}</td>
+        <td>${esc(l.placa)}</td>
+        <td>${esc(l.plataforma)}</td>
+        <td>${esc(l.vehiculo)}</td>
+        <td>${esc(l.zona)}</td>
+        <td>${esc(l.horario)}</td>
+        <td>${esc(l.direccion)}</td>
+        <td>${esc(l.referencia)}</td>
+        <td>${esc(l.telefono)}</td>
+        <td>${esc(l.correo)}</td>
+      </tr>
+    `).join("");
+  }
+
+  document.getElementById("password-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") intentarLogin();
+  });
+</script>
+</body>
+</html>
