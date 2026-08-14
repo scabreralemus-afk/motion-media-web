@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Motion Media — Publicidad LED en movimiento</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- VIEW: HOME -->
+<!-- ============================================================ -->
+<div class="view is-active" id="view-home">
+
+  <header class="navbar">
+    <div class="container navbar__inner">
+      <span class="logo"><span class="logo__rainbow">Motion</span>Media</span>
+      <nav class="navbar__links">
+        <a href="#publicidad" data-nav-section="publicidad">Publicítate</a>
+        <a href="#conductor" data-nav-section="conductor">Súmate como conductor</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero__inner" data-aos="fade-up">
+      <h1>Tu empresa, en toda la ciudad, en cualquier lugar</h1>
+      <p class="hero__subtitle">Pantallas LED instaladas en vehículos de Uber e InDrive que circulan por San Salvador. Reserva tu espacio en línea, desde $19.</p>
+      <div class="hero__actions">
+        <button class="btn btn--primary" data-open-detail="pyme">Quiero publicitarme</button>
+        <button class="btn btn--secondary" data-open-detail="conductor">Quiero llevar una pantalla</button>
+      </div>
+      <div class="hero__badges">
+        <span class="info-tag"><i>✓</i>Sin contrato largo</span>
+        <span class="info-tag"><i>✓</i>Se mueve por toda la ciudad</span>
+        <span class="info-tag"><i>✓</i>Reservas 100% en línea</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="publicidad" class="section section--light">
+    <div class="container" data-aos="fade-up">
+      <span class="eyebrow">Para PYMES</span>
+      <h2>Publicítate con nosotros</h2>
+      <p class="section__lead">Una valla fija cuesta desde $500 al mes y no se mueve. Tu anuncio en Motion Media recorre las zonas de mayor tráfico de la ciudad, a una fracción del costo.</p>
+
+      <div class="pricing-grid">
+        <div class="pricing-card" data-aos="zoom-in" data-aos-delay="0" data-paquete="Día" data-precio="19">
+          <h3>Día</h3>
+          <p class="price">$19</p>
+          <p class="pricing-desc">Ideal para probar una promoción puntual</p>
+        </div>
+        <div class="pricing-card" data-aos="zoom-in" data-aos-delay="80" data-paquete="Semana" data-precio="55">
+          <h3>Semana</h3>
+          <p class="price">$55</p>
+          <p class="pricing-desc">Cobertura sostenida durante 7 días</p>
+        </div>
+        <div class="pricing-card pricing-card--featured" data-aos="zoom-in" data-aos-delay="120" data-paquete="Mes" data-precio="99">
+          <span class="pricing-tag">Más elegido</span>
+          <h3>Mes</h3>
+          <p class="price">$99</p>
+          <p class="pricing-desc">Presencia constante todo el mes</p>
+        </div>
+        <div class="pricing-card" data-aos="zoom-in" data-aos-delay="160" data-paquete="Premium" data-precio="149">
+          <h3>Premium</h3>
+          <p class="price">$149</p>
+          <p class="pricing-desc">Zona céntrica + horario nocturno de mayor tráfico</p>
+        </div>
+      </div>
+
+      <div class="center-cta">
+        <button class="btn btn--primary" data-open-detail="pyme">Quiero publicitarme</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="conductor" class="section section--dark">
+    <div class="container">
+      <span class="eyebrow">Para conductores</span>
+      <h2>Gana hasta $80 extra al mes por llevar una pantalla</h2>
+      <p class="section__lead">Si manejas para Uber o InDrive, súmate a la red de Motion Media. Nosotros instalamos, damos mantenimiento y te pagamos cada mes según las horas que la pantalla estuvo encendida.</p>
+
+      <div class="benefits-grid">
+        <div class="benefit-card" data-aos="zoom-in" data-aos-delay="0">
+          <h3>No cambia tu ruta</h3>
+          <p>Sigues manejando como siempre, la pantalla trabaja mientras tú trabajas.</p>
+        </div>
+        <div class="benefit-card" data-aos="zoom-in" data-aos-delay="80">
+          <h3>Nosotros instalamos</h3>
+          <p>Instalación y mantenimiento sin costo para ti, sin complicaciones.</p>
+        </div>
+        <div class="benefit-card" data-aos="zoom-in" data-aos-delay="160">
+          <h3>Pago mensual fijo</h3>
+          <p>Ingreso extra depositado cada mes según tus horas al aire.</p>
+        </div>
+      </div>
+
+      <div class="center-cta">
+        <button class="btn btn--primary" data-open-detail="conductor">Quiero llevar una pantalla</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Motion Media · Publicidad exterior digital en movimiento · El Salvador</p>
+      <p class="footer__note">Este sitio es un MVP de validación. Ninguna reserva realiza un cobro real. · <a href="mvp-docs.html" style="color:inherit; text-decoration:underline;">Documentación del MVP</a></p>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- VIEW: DETALLE CONDUCTOR (estilo Netflix) -->
+<!-- ============================================================ -->
+<div class="view" id="view-conductor">
+  <div class="detail">
+    <div class="detail__hero detail__hero--conductor">
+      <button class="detail__back" data-back-home>← Volver</button>
+      <div class="detail__hero-overlay">
+        <span class="detail__eyebrow">Para conductores de Uber e InDrive</span>
+        <h1>Tu nueva fuente de ingresos te espera</h1>
+        <p>Convierte tu auto en un espacio publicitario mientras trabajas. Instalamos la pantalla, tú sigues manejando, y cada mes recibes un pago fijo por las horas que estuvo encendida.</p>
+        <a href="registro-conductor.html" class="btn btn--primary btn--lg" data-track-click="clic_pantalla">Quiero registrarme como conductor</a>
+      </div>
+    </div>
+
+    <div class="detail__body container">
+      <h2>Cómo funciona el pago</h2>
+      <div class="detail-grid">
+        <div class="detail-card" data-aos="zoom-in" data-aos-delay="0">
+          <h3>Instalación sin costo</h3>
+          <p>Nosotros instalamos la pantalla en tu vehículo y damos mantenimiento, tú no pagas nada.</p>
+        </div>
+        <div class="detail-card" data-aos="zoom-in" data-aos-delay="80">
+          <h3>Ganas por horas encendida</h3>
+          <p>El pago se calcula según las horas al día que la pantalla estuvo circulando y encendida.</p>
+        </div>
+        <div class="detail-card" data-aos="zoom-in" data-aos-delay="160">
+          <h3>Hasta $80 al mes</h3>
+          <p>Un ingreso extra fijo, depositado cada mes, sin afectar tus ganancias actuales de la plataforma.</p>
+        </div>
+      </div>
+
+      <h2>Requisitos para aplicar</h2>
+      <ul class="detail-list">
+        <li>Ser conductor activo de Uber, InDrive o ambas</li>
+        <li>Circular al menos 4 horas al día en el área metropolitana de San Salvador</li>
+        <li>Vehículo en buen estado, con placas y tarjeta de circulación al día</li>
+        <li>DUI y licencia de conducir vigentes</li>
+      </ul>
+
+      <div class="center-cta">
+        <a href="registro-conductor.html" class="btn btn--primary btn--lg" data-track-click="clic_pantalla">Quiero registrarme como conductor</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- VIEW: DETALLE PYME (estilo Netflix) -->
+<!-- ============================================================ -->
+<div class="view" id="view-pyme">
+  <div class="detail">
+    <div class="detail__hero detail__hero--pyme">
+      <button class="detail__back" data-back-home>← Volver</button>
+      <div class="detail__hero-overlay">
+        <span class="detail__eyebrow">Para PYMES de San Salvador</span>
+        <h1>Lleva tu negocio a toda la ciudad</h1>
+        <p>Publicidad exterior digital en movimiento: tu anuncio recorre las zonas de mayor tráfico, sin el costo ni el contrato largo de una valla fija.</p>
+        <a href="registro-pyme.html" class="btn btn--primary btn--lg" id="detail-pyme-cta" data-track-click="clic_publicidad">Quiero registrar mi negocio</a>
+      </div>
+    </div>
+
+    <div class="detail__body container">
+      <h2>Nuestros planes</h2>
+      <div class="pricing-grid" id="detail-pricing-grid">
+        <div class="pricing-card" data-aos="zoom-in" data-aos-delay="240" data-paquete="Día" data-precio="19">
+          <h3>Día</h3>
+          <p class="price">$19</p>
+          <p class="pricing-desc">Ideal para probar una promoción puntual</p>
+        </div>
+        <div class="pricing-card" data-aos="zoom-in" data-aos-delay="320" data-paquete="Semana" data-precio="55">
+          <h3>Semana</h3>
+          <p class="price">$55</p>
+          <p class="pricing-desc">Cobertura sostenida durante 7 días</p>
+        </div>
+        <div class="pricing-card pricing-card--featured" data-aos="zoom-in" data-aos-delay="120" data-paquete="Mes" data-precio="99">
+          <span class="pricing-tag">Más elegido</span>
+          <h3>Mes</h3>
+          <p class="price">$99</p>
+          <p class="pricing-desc">Presencia constante todo el mes</p>
+        </div>
+        <div class="pricing-card" data-aos="zoom-in" data-aos-delay="400" data-paquete="Premium" data-precio="149">
+          <h3>Premium</h3>
+          <p class="price">$149</p>
+          <p class="pricing-desc">Zona céntrica + horario nocturno de mayor tráfico</p>
+        </div>
+      </div>
+
+      <h2>Cómo funciona</h2>
+      <ul class="detail-list detail-list--steps">
+        <li><strong>1. Elige tu paquete y zona</strong> — Día, semana, mes o premium, en la zona que más te convenga.</li>
+        <li><strong>2. Sube tu arte</strong> — Tu diseño o usa una plantilla, nosotros lo preparamos para la pantalla.</li>
+        <li><strong>3. Tu anuncio sale al aire</strong> — Ves un reporte de horas al aire y zonas recorridas.</li>
+      </ul>
+
+      <h2>¿Cuántas veces se muestra tu anuncio?</h2>
+      <div class="alcance-box" data-aos="fade-up">
+        <p class="alcance-box__lead">Tu anuncio se muestra en las pantallas de todos los conductores que cubren tu zona, mientras circulan por la ciudad.</p>
+        <div class="alcance-box__stat">
+          <span class="alcance-box__numero">~480</span>
+          <span class="alcance-box__texto">veces al día entra tu anuncio en el ciclo de cada pantalla de tu zona (6 anuncios por turno de 10 segundos, si la pantalla cumple la meta de 8 horas encendida)</span>
+        </div>
+        <p class="alcance-box__nota">Esto es cuántas veces entra en el ciclo, no cuánta gente lo ve pasar — cuánta gente realmente lo ve es justo lo que estamos validando con este MVP antes de escalar la flota.</p>
+      </div>
+
+      <h2>Lo que sí puedes medir hoy</h2>
+      <div class="reporte-box" data-aos="fade-up">
+        <div class="reporte-box__icon">📊</div>
+        <div>
+          <h3>El reporte que recibes</h3>
+          <p>Al terminar tu campaña te compartimos cuántas horas estuvo al aire tu anuncio y qué zonas recorrió — la prueba de valor concreta que sí podemos entregarte desde el primer mes.</p>
+        </div>
+      </div>
+
+      <div class="center-cta">
+        <a href="registro-pyme.html" class="btn btn--primary btn--lg" id="detail-pyme-cta-2" data-track-click="clic_publicidad">Quiero registrar mi negocio</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Burbuja flotante para dejar reseña (visible en todo index.html) -->
+<button class="review-fab" id="review-fab" type="button">★ Reseña</button>
+
+<!-- Modal de reseña (estrellas + comentario) -->
+<div class="modal-overlay" id="modal-review">
+  <div class="modal">
+    <button class="modal__close" data-close-review>&times;</button>
+    <div id="review-form-wrap">
+      <h3>Cuéntanos qué te pareció</h3>
+      <form id="form-review" class="review-form">
+        <label>Eres...
+          <select name="tipo_persona" id="review-tipo" required>
+            <option value="">Selecciona una opción</option>
+            <option value="PYME">PYME / anunciante</option>
+            <option value="Conductor">Conductor</option>
+          </select>
+        </label>
+        <label>Nombre (opcional)
+          <input type="text" name="nombre" />
+        </label>
+        <div class="star-field">
+          <span>¿Qué tan fácil fue usar el sitio?</span>
+          <div class="star-rating" data-star-group="experiencia">
+            <button type="button" data-star="1">★</button>
+            <button type="button" data-star="2">★</button>
+            <button type="button" data-star="3">★</button>
+            <button type="button" data-star="4">★</button>
+            <button type="button" data-star="5">★</button>
+          </div>
+        </div>
+        <div class="star-field">
+          <span>¿Qué tan probable es que pagues o te unas como conductor?</span>
+          <div class="star-rating" data-star-group="interes">
+            <button type="button" data-star="1">★</button>
+            <button type="button" data-star="2">★</button>
+            <button type="button" data-star="3">★</button>
+            <button type="button" data-star="4">★</button>
+            <button type="button" data-star="5">★</button>
+          </div>
+        </div>
+        <label>Comentario (opcional)
+          <textarea name="comentario" rows="3"></textarea>
+        </label>
+        <p class="error" id="review-error" hidden>Por favor califica ambas preguntas con estrellas.</p>
+        <button type="submit" class="btn btn--primary btn--block">Enviar reseña</button>
+      </form>
+    </div>
+    <div id="review-exito" hidden>
+      <div class="success-icon">✓</div>
+      <h3>¡Gracias por tu opinión!</h3>
+      <p>Nos ayuda a mejorar Motion Media antes de lanzarlo oficialmente.</p>
+      <button class="btn btn--secondary" data-close-review>Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
