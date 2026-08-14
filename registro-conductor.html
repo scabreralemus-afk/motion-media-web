@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Registro de conductor — Motion Media</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="registro-page">
+
+<header class="navbar navbar--registro">
+  <div class="container navbar__inner">
+    <a href="index.html" class="logo"><span class="logo__rainbow">Motion</span>Media</a>
+    <a href="index.html" class="registro-exit">Salir</a>
+  </div>
+</header>
+
+<main class="registro">
+  <div class="container registro__container">
+
+    <div class="registro__intro" id="registro-intro" data-aos="fade-up">
+      <span class="eyebrow">Registro de conductor</span>
+      <h1>Cuéntanos sobre ti y tu vehículo</h1>
+      <p class="registro__lead">Esta información nos permite confirmar que eres un conductor activo y que tu vehículo está en condiciones de llevar la pantalla. Revisamos cada solicitud antes de contactarte.</p>
+
+      <form id="form-conductor" class="registro-form">
+        <fieldset>
+          <legend>Datos de contacto</legend>
+          <div class="form-grid">
+            <label>Nombre completo
+              <input type="text" name="nombre" required />
+            </label>
+            <label>Correo electrónico
+              <input type="email" name="correo" required />
+            </label>
+            <label>Teléfono
+              <input type="tel" name="telefono" required />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Verificación como conductor</legend>
+          <div class="form-grid">
+            <label>DUI
+              <input type="text" name="dui" placeholder="00000000-0" required />
+            </label>
+            <label>Número de licencia de conducir
+              <input type="text" name="licencia" required />
+            </label>
+            <label>Número de placa del vehículo
+              <input type="text" name="placa" required />
+            </label>
+            <label>Plataforma en la que trabajas
+              <select name="plataforma" required>
+                <option value="">Selecciona una opción</option>
+                <option>Uber</option>
+                <option>InDrive</option>
+                <option>Ambas</option>
+              </select>
+            </label>
+          </div>
+          <p class="form-note">Por ahora solo pedimos los números de tus documentos; no necesitas adjuntar fotos. Podríamos pedirte verlos en persona antes de instalar la pantalla.</p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Tu vehículo y disponibilidad</legend>
+          <div class="form-grid">
+            <label>Modelo de vehículo
+              <input type="text" name="vehiculo" placeholder="Ej. Toyota Yaris 2019" required />
+            </label>
+            <label>Zona donde manejas la mayoría del tiempo
+              <select name="zona" required>
+                <option value="">Selecciona una zona</option>
+                <option>Centro</option>
+                <option>Metrocentro</option>
+                <option>Santa Elena</option>
+                <option>Antiguo Cuscatlán</option>
+                <option>Santa Tecla</option>
+              </select>
+            </label>
+            <label>Horas al día que circulas
+              <select name="horario" required>
+                <option value="">Selecciona un rango</option>
+                <option>Menos de 4 horas</option>
+                <option>4 a 8 horas</option>
+                <option>Más de 8 horas</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Dirección para instalación</legend>
+          <p class="form-note form-note--top">Solo la usamos si tu solicitud es aprobada, para coordinar dónde instalar la pantalla en tu vehículo.</p>
+          <div class="form-grid">
+            <label>Dirección completa
+              <input type="text" name="direccion" placeholder="Calle, colonia, municipio" required />
+            </label>
+            <label>Punto de referencia
+              <input type="text" name="referencia" placeholder="Ej. casa azul frente a la tienda X" required />
+            </label>
+          </div>
+        </fieldset>
+
+        <label class="form-full">Algo más que debamos saber (opcional)
+          <textarea name="mensaje" rows="3"></textarea>
+        </label>
+
+        <button type="submit" class="btn btn--primary btn--block btn--lg">Enviar solicitud</button>
+      </form>
+    </div>
+
+    <div class="registro__exito" id="registro-exito" hidden>
+      <div class="success-icon">✓</div>
+      <h1>¡Solicitud recibida!</h1>
+      <p>Estamos revisando tu información. Si tu zona, horario y documentos encajan con la red, te contactamos por correo o teléfono para coordinar la instalación.</p>
+      <a href="index.html" class="btn btn--secondary">Volver al inicio</a>
+    </div>
+
+  </div>
+</main>
+
+<!-- Pop-up de confirmación (simulado) -->
+<div class="modal-overlay" id="modal-confirmacion">
+  <div class="modal">
+    <div class="success-icon">✓</div>
+    <h3>Solicitud enviada</h3>
+    <p>Te enviamos un correo de confirmación a <strong id="conf-correo">tu correo</strong>. Revisa tu bandeja de entrada (y la carpeta de spam).</p>
+    <p class="modal__resend">¿No recibiste nada? <a href="#" id="reenviar-correo">Reenviar correo</a> · <a href="#" id="reenviar-sms">Recibir por SMS</a></p>
+    <p class="modal__feedback" id="conf-feedback" hidden></p>
+    <button class="btn btn--primary btn--block" id="cerrar-confirmacion">Continuar</button>
+    <p class="modal__resend"><a href="#" id="abrir-review">Dejar una reseña</a></p>
+  </div>
+</div>
+
+<!-- Modal de reseña (estrellas + comentario) — tipo fijo: Conductor -->
+<div class="modal-overlay" id="modal-review" data-tipo-fijo="Conductor">
+  <div class="modal">
+    <button class="modal__close" data-close-review>&times;</button>
+    <div id="review-form-wrap">
+      <h3>Cuéntanos qué te pareció</h3>
+      <form id="form-review" class="review-form">
+        <label>Nombre (opcional)
+          <input type="text" name="nombre" />
+        </label>
+        <div class="star-field">
+          <span>¿Qué tan fácil fue registrarte?</span>
+          <div class="star-rating" data-star-group="experiencia">
+            <button type="button" data-star="1">★</button>
+            <button type="button" data-star="2">★</button>
+            <button type="button" data-star="3">★</button>
+            <button type="button" data-star="4">★</button>
+            <button type="button" data-star="5">★</button>
+          </div>
+        </div>
+        <div class="star-field">
+          <span>¿Qué tan probable es que te unas como conductor?</span>
+          <div class="star-rating" data-star-group="interes">
+            <button type="button" data-star="1">★</button>
+            <button type="button" data-star="2">★</button>
+            <button type="button" data-star="3">★</button>
+            <button type="button" data-star="4">★</button>
+            <button type="button" data-star="5">★</button>
+          </div>
+        </div>
+        <label>Comentario (opcional)
+          <textarea name="comentario" rows="3"></textarea>
+        </label>
+        <p class="error" id="review-error" hidden>Por favor califica ambas preguntas con estrellas.</p>
+        <button type="submit" class="btn btn--primary btn--block">Enviar reseña</button>
+      </form>
+    </div>
+    <div id="review-exito" hidden>
+      <div class="success-icon">✓</div>
+      <h3>¡Gracias por tu opinión!</h3>
+      <p>Nos ayuda a mejorar Motion Media antes de lanzarlo oficialmente.</p>
+      <button class="btn btn--secondary" data-close-review>Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

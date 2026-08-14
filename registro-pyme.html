@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Registro de negocio — Motion Media</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="registro-page">
+
+<header class="navbar navbar--registro">
+  <div class="container navbar__inner">
+    <a href="index.html" class="logo"><span class="logo__rainbow">Motion</span>Media</a>
+    <a href="index.html" class="registro-exit">Salir</a>
+  </div>
+</header>
+
+<main class="registro">
+  <div class="container registro__container">
+
+    <!-- Paso 1: datos del negocio -->
+    <div class="registro__intro" id="registro-step-form" data-aos="fade-up">
+      <span class="eyebrow">Registro de negocio</span>
+      <h1>Cuéntanos sobre tu negocio</h1>
+      <p class="registro__lead">Con esto reservamos tu espacio y preparamos tu campaña. El paquete seleccionado se recuerda de la página anterior, pero puedes cambiarlo aquí.</p>
+
+      <form id="form-publicidad" class="registro-form">
+        <fieldset>
+          <legend>Paquete</legend>
+          <div class="pricing-grid pricing-grid--compact" id="pyme-pricing-grid">
+            <div class="pricing-card" data-paquete="Día" data-precio="19">
+              <h3>Día</h3><p class="price">$19</p>
+            </div>
+            <div class="pricing-card" data-paquete="Semana" data-precio="55">
+              <h3>Semana</h3><p class="price">$55</p>
+            </div>
+            <div class="pricing-card" data-paquete="Mes" data-precio="99">
+              <h3>Mes</h3><p class="price">$99</p>
+            </div>
+            <div class="pricing-card" data-paquete="Premium" data-precio="149">
+              <h3>Premium</h3><p class="price">$149</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Datos de contacto</legend>
+          <div class="form-grid">
+            <label>Nombre completo
+              <input type="text" name="nombre" required />
+            </label>
+            <label>Correo electrónico
+              <input type="email" name="correo" required />
+            </label>
+            <label>Teléfono
+              <input type="tel" name="telefono" required />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sobre tu negocio</legend>
+          <div class="form-grid">
+            <label>Nombre del negocio
+              <input type="text" name="empresa" required />
+            </label>
+            <label>Rubro
+              <select name="rubro" required>
+                <option value="">Selecciona una opción</option>
+                <option>Restaurante</option>
+                <option>Cafetería</option>
+                <option>Barbería / salón</option>
+                <option>Clínica / salud</option>
+                <option>Gimnasio</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <label>¿Qué describe mejor a tu negocio?
+              <select name="tipo_negocio" required>
+                <option value="">Selecciona una opción</option>
+                <option>Negocio informal (sin registro todavía)</option>
+                <option>Negocio registrado formalmente</option>
+              </select>
+            </label>
+            <label>NIT o DUI (si tienes)
+              <input type="text" name="nit_dui" placeholder="Opcional si tu negocio es informal" />
+            </label>
+            <label>Redes sociales o sitio web (opcional)
+              <input type="text" name="redes" placeholder="Ej. instagram.com/tunegocio" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Dónde y cuándo</legend>
+          <div class="form-grid">
+            <label>Zona de interés
+              <select name="zona" required>
+                <option value="">Selecciona una zona</option>
+                <option>Centro</option>
+                <option>Metrocentro</option>
+                <option>Santa Elena</option>
+                <option>Antiguo Cuscatlán</option>
+                <option>Santa Tecla</option>
+              </select>
+            </label>
+            <label>Horario de interés
+              <select name="horario" required>
+                <option value="">Selecciona un horario</option>
+                <option>Mañana</option>
+                <option>Tarde</option>
+                <option>Noche</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Tu arte publicitario</legend>
+          <p class="form-note form-note--top">Sube el diseño que quieres mostrar en la pantalla. Aceptamos imagen, video, PDF o archivos de diseño (AI, PSD). Es opcional — si no lo tienes listo, puedes enviarlo después por correo.</p>
+          <label class="form-full">Archivo (opcional)
+            <input type="file" id="arte-archivo" name="arte" accept=".jpg,.jpeg,.png,.mp4,.mov,.pdf,.ai,.psd" />
+          </label>
+          <p class="form-note" id="arte-nombre-archivo"></p>
+        </fieldset>
+
+        <label class="form-full">Mensaje (opcional)
+          <textarea name="mensaje" rows="3" placeholder="Cuéntanos sobre tu negocio o tu anuncio"></textarea>
+        </label>
+
+        <button type="submit" class="btn btn--primary btn--block btn--lg">Continuar a pago</button>
+      </form>
+    </div>
+
+    <!-- Paso 2: pago simbólico (portal de pagos simulado) -->
+    <div class="registro__intro" id="registro-step-pago" hidden>
+      <span class="eyebrow">Pago seguro</span>
+      <h1>Confirma tu reserva</h1>
+
+      <div class="checkout-portal">
+        <div class="checkout-portal__summary">
+          <div class="checkout-row"><span>Negocio</span><span id="pago-negocio-nombre">—</span></div>
+          <div class="checkout-row"><span>Paquete</span><span id="pago-paquete-nombre">—</span></div>
+          <div class="checkout-row checkout-row--total"><span>Total</span><span id="pago-paquete-precio">$0</span></div>
+        </div>
+
+        <form id="form-pago" class="registro-form checkout-form">
+          <div class="checkout-portal__badges">
+            <span class="card-badge">VISA</span>
+            <span class="card-badge">Mastercard</span>
+            <span class="card-badge">AMEX</span>
+            <span class="checkout-lock">🔒 Conexión segura</span>
+          </div>
+
+          <label>Nombre en la tarjeta
+            <input type="text" placeholder="Como aparece en tu tarjeta" required />
+          </label>
+          <label>Número de tarjeta
+            <input type="text" maxlength="19" placeholder="4242 4242 4242 4242" required />
+          </label>
+          <div class="form-grid form-grid--2">
+            <label>Vencimiento
+              <input type="text" placeholder="MM/AA" maxlength="5" required />
+            </label>
+            <label>CVC
+              <input type="text" placeholder="123" maxlength="3" required />
+            </label>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block btn--lg">Pagar y confirmar</button>
+          <p class="checkout-note">Simulación de pago — no se realiza ningún cargo real. Parte del MVP de validación.</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Paso 3: éxito -->
+    <div class="registro__exito" id="registro-exito" hidden>
+      <div class="success-icon">✓</div>
+      <h1>¡Listo! Estás en la lista</h1>
+      <p>Te contactamos en cuanto activemos tu zona. Gracias por confiar en Motion Media.</p>
+      <a href="index.html" class="btn btn--secondary">Volver al inicio</a>
+    </div>
+
+  </div>
+</main>
+
+<!-- Pop-up de confirmación (simulado) -->
+<div class="modal-overlay" id="modal-confirmacion">
+  <div class="modal">
+    <div class="success-icon">✓</div>
+    <h3>Pago confirmado</h3>
+    <p>Te enviamos un correo de confirmación a <strong id="conf-correo">tu correo</strong>. Revisa tu bandeja de entrada (y la carpeta de spam).</p>
+    <p class="modal__resend">¿No recibiste nada? <a href="#" id="reenviar-correo">Reenviar correo</a> · <a href="#" id="reenviar-sms">Recibir por SMS</a></p>
+    <p class="modal__feedback" id="conf-feedback" hidden></p>
+    <button class="btn btn--primary btn--block" id="cerrar-confirmacion">Continuar</button>
+    <p class="modal__resend"><a href="#" id="abrir-review">Dejar una reseña</a></p>
+  </div>
+</div>
+
+<!-- Modal de reseña (estrellas + comentario) — tipo fijo: PYME -->
+<div class="modal-overlay" id="modal-review" data-tipo-fijo="PYME">
+  <div class="modal">
+    <button class="modal__close" data-close-review>&times;</button>
+    <div id="review-form-wrap">
+      <h3>Cuéntanos qué te pareció</h3>
+      <form id="form-review" class="review-form">
+        <label>Nombre (opcional)
+          <input type="text" name="nombre" />
+        </label>
+        <div class="star-field">
+          <span>¿Qué tan fácil fue registrar tu negocio?</span>
+          <div class="star-rating" data-star-group="experiencia">
+            <button type="button" data-star="1">★</button>
+            <button type="button" data-star="2">★</button>
+            <button type="button" data-star="3">★</button>
+            <button type="button" data-star="4">★</button>
+            <button type="button" data-star="5">★</button>
+          </div>
+        </div>
+        <div class="star-field">
+          <span>¿Qué tan probable es que pagues por este servicio?</span>
+          <div class="star-rating" data-star-group="interes">
+            <button type="button" data-star="1">★</button>
+            <button type="button" data-star="2">★</button>
+            <button type="button" data-star="3">★</button>
+            <button type="button" data-star="4">★</button>
+            <button type="button" data-star="5">★</button>
+          </div>
+        </div>
+        <label>Comentario (opcional)
+          <textarea name="comentario" rows="3"></textarea>
+        </label>
+        <p class="error" id="review-error" hidden>Por favor califica ambas preguntas con estrellas.</p>
+        <button type="submit" class="btn btn--primary btn--block">Enviar reseña</button>
+      </form>
+    </div>
+    <div id="review-exito" hidden>
+      <div class="success-icon">✓</div>
+      <h3>¡Gracias por tu opinión!</h3>
+      <p>Nos ayuda a mejorar Motion Media antes de lanzarlo oficialmente.</p>
+      <button class="btn btn--secondary" data-close-review>Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
